@@ -89,7 +89,7 @@ export default function CardOne({ params }) {
                       {item.name}
                     </h1>
                     <p className="mt-2 text-sm text-[white] hover:text-[20px]">
-                      click here for get previous year pepar and dawnload
+                      click here for get previous year pepar and download
                     </p>
                     <button className="mt-2 inline-flex cursor-pointer items-center text-sm font-semibold text-white"></button>
                   </div>

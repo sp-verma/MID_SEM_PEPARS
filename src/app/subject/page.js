@@ -5,7 +5,10 @@ import { redirect } from "next/navigation";
 
 export const fetchSubjects = async ({ branch, sem }) => {
   const response = await fetch(
-    `http://localhost:3000/api/subject?branch=${branch}&sem=${sem}`
+    `http://localhost:3000/api/subject?branch=${branch}&sem=${sem}`,
+    {
+      cache:"no-cache"
+    },
   );
   const data = await response.json();
   return data;
@@ -33,9 +36,9 @@ const page = async ({ searchParams }) => {
 
       <div className=" flex gap-6 flex-wrap justify-center items-center pt-[20%] ">
         {subjects?.length ? (
-          subjects.map((sub, _id) => {
+          subjects.map((sub, index) => {
             return (
-              <div key={_id} className="">
+              <div key={index} className="">
                 <Link
                   href={`/pyqpepar?branch=${branch}&sem=${sem}&subject=${sub.name}`}
                 >
