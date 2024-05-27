@@ -1,15 +1,15 @@
 import UploadPyqForm from "@/components/UploadPyqForm";
 import Navbar from "@/components/navbar";
 
-const fetchPyq = async () => {
-  const response = await fetch("http://localhost:3000/api/pyq");
-  return response.json();
-};
+// const fetchPyq = async () => {
+//   const response = await fetch("http://localhost:3000/api/pyq");
+//   return response.json();
+// };
 
 const page = async () => {
-  const data = await fetchPyq();
+  // const data = await fetchPyq();
 
-  const pyqdata = data?.pyqs;
+  // const pyqdata = data?.pyqs;
 
   return (
     <div className="bg-gradient-to-r from-slate-900 to-slate-700">
@@ -22,7 +22,7 @@ const page = async () => {
         <UploadPyqForm />
       </div>
       <div className="  flex gap-2 flex-wrap justify-stretch bg-gradient-to-r from-slate-900 to-slate-700 ">
-        {pyqdata?.map((pyq, index) => {
+        {/* {pyqdata?.map((pyq, index) => {
           return (
             <div key={index} className="">
               <div className="relative h-[200px] w-[200px] rounded-md">
@@ -45,7 +45,7 @@ const page = async () => {
               </div>
             </div>
           );
-        })}
+        })} */}
       </div>
     </div>
   );

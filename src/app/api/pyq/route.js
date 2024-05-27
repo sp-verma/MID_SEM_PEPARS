@@ -7,7 +7,9 @@ import Branch from "@/models/Branch";
 import { UTApi } from "uploadthing/server";
 
 conectDB();
+
 let globalUrl = null;
+
 export const POST = async (req) => {
   const reqbody = await req.json();
   const { subject, branch, sem, url, year } = reqbody;
