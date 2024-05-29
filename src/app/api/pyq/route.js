@@ -27,7 +27,6 @@ export const POST = async (req) => {
       subjectId = newsub._id;
     }
 
-
     const pyq = await Pyq.findOne({ $and: [{ subject: subjectId }, { year }] });
     if (!pyq) await Pyq.create({ subject: subjectId, url, year });
 
@@ -70,7 +69,7 @@ export const GET = async (req) => {
         // { path: "subject.branch", model: Branch },
       ]);
     }
-
+    console.log('sp',pyqs)
     return NextResponse.json({
       pyqs,
       message: "pyqdata fetched Successfully",

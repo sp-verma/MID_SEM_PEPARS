@@ -3,11 +3,13 @@ import UploadPyqForm from "@/components/UploadPyqForm";
 import Navbar from "@/components/navbar";
 import { fetchPyq } from "./action";
 
+
 const page = async () => {
+
   const data = await fetchPyq();
 
   const pyqdata = data?.pyqs;
-  // console.log(pyqdata);
+  console.log(pyqdata);
 
   return (
     <div className="bg-gradient-to-r from-slate-900 to-slate-700">

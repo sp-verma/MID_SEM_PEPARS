@@ -36,7 +36,6 @@ const GET = async (req) => {
   if (branch && sem)
     subjects = await Subject.find({ $and: [{ branch }, { sem }] });
   else subjects = await Subject.find({});
-
   try {
     return NextResponse.json({
       subjects,

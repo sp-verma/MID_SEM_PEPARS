@@ -11,6 +11,7 @@ const page = async ({ searchParams }) => {
 
   const data = await fetchPyq({ branch, sem, subject });
   const pyqs = data?.pyqs;
+  
 
   if (!branch || !sem) {
     redirect("/");
