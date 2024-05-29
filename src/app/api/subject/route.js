@@ -40,7 +40,7 @@ const GET = async (req) => {
     return NextResponse.json({
       subjects,
       message: "subject fetched Successfully",
-      type: "success",
+      type: "successs"
     });
   } catch (error) {
     console.log(err);
