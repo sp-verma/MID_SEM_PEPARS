@@ -3,7 +3,7 @@ import { conectDB } from "@/lib/conection";
 import { revalidatePath } from "next/cache";
 import Pyq from "@/models/Pyq";
 import Subject from "@/models/Subject";
-import Branch from "@/models/Branch";
+
 import { UTApi } from "uploadthing/server";
 
 conectDB();
@@ -27,9 +27,6 @@ export const POST = async (req) => {
       subjectId = newsub._id;
     }
 
-    if (!sub) {
-      const sp = await Branch.create({ name: subject, branch, sem });
-    }
 
     const pyq = await Pyq.findOne({ $and: [{ subject: subjectId }, { year }] });
     if (!pyq) await Pyq.create({ subject: subjectId, url, year });

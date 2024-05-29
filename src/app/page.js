@@ -1,8 +1,9 @@
 import Navbar from "@/components/navbar";
 import Top from "@/components/top";
-import Middle from "@/components/middle";
+
 import Card from "@/components/card";
-import Footer from "@/components/footer";
+import Footer from "@/components/Footer/Footer";
+
 
 export default function Home({ searchParams }) {
   return (
@@ -14,7 +15,9 @@ export default function Home({ searchParams }) {
       <div className="mt-[10px]">
         <Top />
         <Card params={searchParams} />
+       
       </div>
+      <Footer/>
     </div>
   );
 }

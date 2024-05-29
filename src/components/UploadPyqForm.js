@@ -12,6 +12,7 @@ const UploadPyqForm = () => {
     branch: "",
     year: "",
     sem: "",
+    url: "",
   });
 
   const onDrop = useCallback((acceptedFiles) => {
@@ -21,6 +22,7 @@ const UploadPyqForm = () => {
   const { startUpload, permittedFileInfo } = useUploadThing("uploadpepar", {
     onClientUploadComplete: async (res) => {
       const url = res[0].url;
+      console.log(url);
 
       // const formSubmit=(data)=>{
 
@@ -43,13 +45,14 @@ const UploadPyqForm = () => {
       });
 
       const data = await resp.json();
-      
+
       if (data.type === "success") {
         setForm({
           subject: "",
           branch: "",
           year: "",
           sem: "",
+          url: "",
         });
       }
     },

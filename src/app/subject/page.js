@@ -1,18 +1,10 @@
 import Link from "next/link";
+import { fetchSubjects } from "./action";
 // import React from "react";
 // import Subject from "@/components/subject";
 import { redirect } from "next/navigation";
 
-export const fetchSubjects = async ({ branch, sem }) => {
-  const response = await fetch(
-    `http://localhost:3000/api/subject?branch=${branch}&sem=${sem}`,
-    {
-      cache:"no-cache"
-    },
-  );
-  const data = await response.json();
-  return data;
-};
+
 
 const page = async ({ searchParams }) => {
   const { branch, sem } = searchParams;
