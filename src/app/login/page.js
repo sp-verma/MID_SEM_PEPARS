@@ -1,5 +1,5 @@
 import Signupform from "@/components/signupform";
-import Footer from "@/components/footer";
+import Footer from "@/components/Footer/Footer";
 import Navbar from '@/components/navbar'
 
 const page = async () => {
@@ -7,7 +7,7 @@ const page = async () => {
     <div className="flex flex-col gap-[50px]">
     <Navbar/>
       <Signupform />
-      <Footer className="border-t" />
+    <Footer/>
     </div>
   );
 };
