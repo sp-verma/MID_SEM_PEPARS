@@ -15,11 +15,12 @@ const top = () => {
       <div className="h-full grid grid-cols-1 lg:grid-cols-2 order-2 items-center">
         <div className="px-4 py-10 sm:px-6 sm:py-16 lg:px-8 lg:py-24">
           <div className="xl:mx-auto xl:w-full xl:max-w-sm 2xl:max-w-md">
-            <div className=" ">
+            <div className=" flex flex-col">
               <p className="mt-3 text-2xl text-center md:text-5xl uppercase font-extrabold bg-gradient-to-r from-rose-400 via-fuchsia-500 to-indigo-500 bg-clip-text text-transparent">
                 {" "}
                 previous years' mid-semester exam papers !
               </p>
+              <Link href={"#get-started"} className="text-white border-2 border-white opacity-100 w-[8rem] h-[4rem] text-center pt-5 rounded-[2rem] m-10">Get Started</Link>
             </div>
 
             <iframe
@@ -42,7 +43,7 @@ const top = () => {
             alt=""
           />
         </div>
-        <Link href={"#get-started"}>Get Started</Link>
+        
       </div>
     </motion.div>
   );

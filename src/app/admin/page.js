@@ -1,11 +1,8 @@
-
 import UploadPyqForm from "@/components/UploadPyqForm";
 import Navbar from "@/components/navbar";
 import { fetchPyq } from "./action";
 
-
 const page = async () => {
-
   const data = await fetchPyq();
 
   const pyqdata = data?.pyqs;
