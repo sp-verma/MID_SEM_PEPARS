@@ -2,7 +2,7 @@ import Link from "next/link";
 import React from "react";
 
 import { redirect } from "next/navigation";
-import { fetchPyq } from "./action";
+
 import Pyq from "@/models/Pyq";
 import Subject from "@/models/Subject";
 import { conectDB } from "@/lib/conection";
@@ -17,27 +17,23 @@ const page = async ({ searchParams }) => {
   // const sem = req.nextUrl.searchParams.get("sem");
   // const subject = req.nextUrl.searchParams.get("subject");
 
-  
-    let pyqs = [];
-    if (branch && sem && subject) {
-      const sub = await Subject.findOne({
-        $and: [{ name: subject }, { sem }, { branch }],
-      });
-      if (!sub) pyqs = [];
-      else
-        pyqs = await Pyq.find({ subject: sub._id }).populate([
-          { path: "subject", model: Subject },
-          // { path: "subject.branch", model: Branch },
-        ]);
-    } else {
-      pyqs = await Pyq.find().populate([
+  let pyqs = [];
+  if (branch && sem && subject) {
+    const sub = await Subject.findOne({
+      $and: [{ name: subject }, { sem }, { branch }],
+    });
+    if (!sub) pyqs = [];
+    else
+      pyqs = await Pyq.find({ subject: sub._id }).populate([
         { path: "subject", model: Subject },
         // { path: "subject.branch", model: Branch },
       ]);
-    }
-  
-    
-  
+  } else {
+    pyqs = await Pyq.find().populate([
+      { path: "subject", model: Subject },
+      // { path: "subject.branch", model: Branch },
+    ]);
+  }
 
   if (!branch || !sem) {
     redirect("/");
