@@ -1,12 +1,17 @@
 import UploadPyqForm from "@/components/UploadPyqForm";
 import Navbar from "@/components/navbar";
-import { fetchPyq } from "./action";
+import { conectDB } from "@/lib/conection";
+import Pyq from "@/models/Pyq";
+import Subject from "@/models/Subject";
 
 const page = async () => {
-  const data = await fetchPyq();
-
-  const pyqdata = data?.pyqs;
-  console.log(pyqdata);
+  "use server";
+  conectDB();
+  const data = await Pyq.find({}).populate([
+    { path: "subject", model: Subject },
+    // { path: "subject.branch", model: Branch },
+  ]);
+  console.log("sp", data);
 
   return (
     <div className="bg-gradient-to-r from-slate-900 to-slate-700">
@@ -19,7 +24,7 @@ const page = async () => {
         <UploadPyqForm />
       </div>
       <div className="  flex gap-2 flex-wrap justify-stretch bg-gradient-to-r from-slate-900 to-slate-700 ">
-        {pyqdata?.map((pyq, index) => {
+        {data?.map((pyq, index) => {
           return (
             <div key={index} className="">
               <div className="relative h-[200px] w-[200px] rounded-md">

@@ -1,20 +1,29 @@
 import Link from "next/link";
-import { fetchSubjects } from "./action";
+
 // import React from "react";
 // import Subject from "@/components/subject";
 import { redirect } from "next/navigation";
+import Subject from "@/models/Subject";
+
+import { conectDB } from "@/lib/conection";
 
 
 
 const page = async ({ searchParams }) => {
+  "use server"
+  conectDB();
   const { branch, sem } = searchParams;
+  let subjects = [];
 
-  if (!branch || !sem) return redirect("/");
+  if (branch && sem)
+    subjects = await Subject.find({ $and: [{ branch }, { sem }] });
+  else subjects = await Subject.find({});
+  
 
-  const data = await fetchSubjects({ branch, sem });
 
-  const subjects = data?.subjects;
+  
 
+  
   if (!branch || !sem) {
     redirect("/");
   }
