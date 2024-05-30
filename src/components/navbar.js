@@ -5,6 +5,8 @@ import { Menu, X } from "lucide-react";
 import { useState } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
+import { signOut, useSession } from "next-auth/react";
+import { Button } from "./ui/button";
 
 const menuItems = [
   {
@@ -23,6 +25,7 @@ const menuItems = [
 
 export default function ExampleNavbarOne() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { status } = useSession()
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -32,10 +35,10 @@ export default function ExampleNavbarOne() {
     <motion.div
       initial={{ y: 10, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
-      className="relative w-full "
+      className="w-full sticky top-0 bg-gray-900 z-50"
     >
-      <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-2 sm:px-6 lg:px-8 ">
-        <div className="inline-flex items-center space-x-2 mt-[30px]">
+      <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-6 sm:px-6 lg:px-8 ">
+        <Link href={'/'} className="inline-flex items-center space-x-2">
           <span>
             <svg
               width="30"
@@ -51,9 +54,23 @@ export default function ExampleNavbarOne() {
             </svg>
           </span>
           <span className="font-bold text-[20px] text-[#fffffe]">PyqHub</span>
-        </div>
-        <div className="hidden lg:block mt-[30px]">
+        </Link>
+        <div className="hidden lg:block">
           <ul className="inline-flex space-x-8">
+            {
+              status === 'authenticated' ?
+
+                <li>
+                  <Link
+                    href='admin'
+                    className="text-[] font-semibold text-white text-[20px]  hover:text-[#eebbc3] "
+                  >
+                    Admin
+                  </Link>
+                </li>
+                :
+                null
+            }
             {menuItems.map((item) => (
               <li key={item.name}>
                 <Link
@@ -66,13 +83,15 @@ export default function ExampleNavbarOne() {
             ))}
           </ul>
         </div>
-        <div className="hidden lg:block mt-[30px] ">
-          <Link
-            href="/login"
-            className="rounded-md text-[20px] px-3 py-2 text-white font-semibold text- shadow-sm hover:bg-[#eebbc3] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
-          >
-            LOGIN
-          </Link>
+        <div className="hidden lg:block ">
+          {
+            status === 'authenticated' ?
+              <Button onClick={signOut} className='bg-white text-gray-900 font-semibold'>Logout</Button>
+              :
+              <Link href="/login">
+                <Button className='bg-white text-gray-900 font-semibold'>Login</Button>
+              </Link>
+          }
         </div>
         <div className="lg:hidden">
           <Menu

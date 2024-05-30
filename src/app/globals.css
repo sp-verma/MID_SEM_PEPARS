@@ -1,11 +1,17 @@
 @tailwind base;
-  @tailwind components;
-  @tailwind utilities;
+@tailwind components;
+@tailwind utilities;
 
-  html{
-    scroll-behavior: smooth
-  }
+html {
+  scroll-behavior: smooth
+}
 
-  body{
-    @apply bg-gray-900;
-  }
+body {
+  @apply bg-gray-900 text-white;
+}
+
+input,
+select,
+option {
+  @apply bg-gray-200
+}

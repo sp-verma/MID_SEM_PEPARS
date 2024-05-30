@@ -1,17 +1,13 @@
-import Link from "next/link";
-import React from "react";
-import Subject from "@/components/subject";
 import { redirect } from "next/navigation";
-import { fetchPyq } from "./action";
+import { fetchPyq } from "@/actions/pyq";
 
 
 
 const page = async ({ searchParams }) => {
   const { branch, sem, subject } = searchParams;
 
-  const data = await fetchPyq({ branch, sem, subject });
-  const pyqs = data?.pyqs;
-  
+  const pyqs = await fetchPyq({ branch, sem, subject });
+
 
   if (!branch || !sem) {
     redirect("/");
@@ -21,41 +17,37 @@ const page = async ({ searchParams }) => {
     <div className=" bg-gray-900 min-h-[42rem] flex flex-col ">
       <p className="mt-3 text-2xl text-center md:text-5xl uppercase font-extrabold bg-gradient-to-r from-rose-400 via-fuchsia-500 to-indigo-500 bg-clip-text text-transparent pt-7">
         {" "}
-        DOWNLOAD YOUR FILE
+        DOWNLOAD PYQ
       </p>
 
 
       <div className=" flex gap-6 flex-wrap justify-center items-center pt-[20%] ">
-      {pyqs.map((pyq, index) => {
-        
-            return (
-              <div key={index} className="">
-                
-                 
-                
-                  <div className="relative h-[120px] w-[200px] border-2 border-white rounded-[25px]  hover:w-[220px] hover:h-[150px]">
-                    <div className="   text-lg font-semibold text-white flex justify-center items-center pt-[15%] hover:text-3xl flex-col  ">
-                    {pyq.subject.name}
-                    <h1> {pyq.year}</h1>
-                   
-                    <a
-                      className="mt-2 inline-flex cursor-pointer items-center text-sm font-semibold text-white"
-                      href={pyq.url}
-                      download={`${pyq.subject.name}_sem-${pyq.subject.sem}_${pyq.year}.pdf`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      download &rarr;
-                    </a>
-                   
-                     
-                    </div>
-                  </div>
-                
+        {pyqs.map((pyq, index) => {
+
+          return (
+            <div key={index} className="">
+              <div className="relative h-[120px] w-[200px] border-2 border-white rounded-[25px]  hover:w-[220px] hover:h-[150px]">
+                <div className="   text-lg font-semibold text-white flex justify-center items-center pt-[15%] hover:text-3xl flex-col  ">
+                  {pyq.subject.name}
+                  <h1> {pyq.year}</h1>
+                  <a
+                    className="mt-2 inline-flex cursor-pointer items-center text-sm font-semibold text-white"
+                    href={pyq.url}
+                    download={`${pyq.subject.name}_sem-${pyq.subject.sem}_${pyq.year}.pdf`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    download &rarr;
+                  </a>
+
+
+                </div>
               </div>
-            );
-          })
-      }
+
+            </div>
+          );
+        })
+        }
       </div>
 
 

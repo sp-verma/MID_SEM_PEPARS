@@ -4,8 +4,11 @@ import { generateClientDropzoneAccept } from "uploadthing/client";
 import { useUploadThing } from "@/utils/uploadthings";
 import { useCallback, useState } from "react";
 import { Upload } from "lucide-react";
+import { Button } from "./ui/button";
+import toast from "react-hot-toast";
 
 const UploadPyqForm = () => {
+  const [loading, setLoading] = useState(false);
   const [file, setFile] = useState([]);
   const [form, setForm] = useState({
     subject: "",
@@ -19,17 +22,9 @@ const UploadPyqForm = () => {
     setFile(acceptedFiles);
   }, []);
 
-  const { startUpload, permittedFileInfo } = useUploadThing("uploadpepar", {
+  const { startUpload, permittedFileInfo, isUploading } = useUploadThing("uploadpepar", {
     onClientUploadComplete: async (res) => {
       const url = res[0].url;
-      console.log(url);
-
-      // const formSubmit=(data)=>{
-
-      //   // data.pdfurl=pdfurl;
-      //   console.log(data);
-      //   setData(data);
-      // }
 
       const { subject, branch, year, sem } = form;
 
@@ -47,6 +42,7 @@ const UploadPyqForm = () => {
       const data = await resp.json();
 
       if (data.type === "success") {
+        toast.success(data.message)
         setForm({
           subject: "",
           branch: "",
@@ -54,13 +50,17 @@ const UploadPyqForm = () => {
           sem: "",
           url: "",
         });
+        setFile([]);
       }
+      setLoading(false);
     },
     onUploadError: () => {
-      console.log("error occurred while uploading");
+      setLoading(false);
+      toast.error("error occurred while uploading, try again");
     },
     onUploadBegin: () => {
-      console.log("upload has begun");
+      setLoading(true);
+      toast("Uploading started");
     },
   });
 
@@ -75,15 +75,21 @@ const UploadPyqForm = () => {
 
   const uplodData = async (e) => {
     e.preventDefault();
+    setLoading(true);
     const { subject, branch, year, sem } = form;
     try {
       if (!subject || !branch || !year || !sem) {
-        return console.log("please fill form");
+        return toast.error("please fill all informations about pyq");
       }
+      if (!file.length)
+        return toast.error("Please select pdf file of pyq");
       startUpload(file);
       // const[data,setData]=useState('')
     } catch (error) {
-      console.log(error);
+      toast.error(error);
+    }
+    finally {
+      setLoading(false);
     }
   };
 
@@ -95,9 +101,9 @@ const UploadPyqForm = () => {
     <>
       <div
         {...getRootProps()}
-        className="w-[8rem] h-[8rem]  flex items-center justify-center m-4 border-2 border-dashed border-spacing-6 border-slate-500 cursor-pointer rounded-xl mx-[42%] bg-green-300"
+        className={`w-full h-60 flex items-center justify-center m-4 border-2 border-dashed border-spacing-6 border-slate-500 ${loading ? 'opacity-50' : 'cursor-pointer'} rounded-xl mx-[42%] bg-gray-600`}
       >
-        <input {...getInputProps()} id="uploader" />
+        <input {...getInputProps()} id="uploader" disabled={loading} />
         <label
           htmlFor="uploader"
           className="text-center pointer-events-none flex flex-col gap-4 items-center justify-center"
@@ -112,109 +118,112 @@ const UploadPyqForm = () => {
           )}
         </label>
       </div>
-      <form onSubmit={uplodData} className="">
-        <div className="">
-          <div className="flex flex-col items-center">
-            <label
-              htmlFor="branch"
-              className="gap-2 text-center text-white  font-bold"
-            >
-              Branch
-            </label>
+      <form onSubmit={uplodData} className="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full">
+        <div className="flex flex-col">
+          <label
+            htmlFor="branch"
+            className="font-bold"
+          >
+            Branch
+          </label>
 
-            <select
-              name="branch"
-              id="branch"
-              className="border-2 border-black border-solid w-[20rem] rounded-[1rem] h-[3rem]"
-              value={form.branch}
-              onChange={updateFormState}
-            >
-              <option value="">select Branch</option>
-              <option value="ai"> AI</option>
-              <option value="cse">CSE</option>
-              <option value="civil">CIVIL</option>
-              <option value="ca">CA</option>
-              <option value="eee">EEE</option>
-              <option value="mechenical">Mechanical</option>
-            </select>
-          </div>
-
-          <div className="flex flex-col items-center">
-            <label
-              htmlFor="semester"
-              className="gap-2 text-center  font-bold text-white"
-            >
-              Semester
-            </label>
-            <select
-              name="sem"
-              id="semester"
-              className="border-2 border-black border-solid w-[20rem] rounded-[1rem] h-[3rem]"
-              placeholder="enter your semester name"
-              value={form.sem}
-              onChange={updateFormState}
-            >
-              <option value="">choose semester</option>
-              <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-              <option value="4">4</option>
-              <option value="5">5</option>
-              <option value="6">6</option>
-              <option value="7">7</option>
-              <option value="8">8</option>
-            </select>
-          </div>
-
-          <div className="flex flex-col items-center">
-            <label
-              htmlFor="subject"
-              className="mb-2 text-center  font-bold text-white"
-            >
-              Subject
-            </label>
-            <input
-              type="text"
-              name="subject"
-              id="subject"
-              placeholder="enter the subject name"
-              className="border-2 border-black border-solid w-[20rem] rounded-[1rem] h-[3rem]"
-              value={form.subject}
-              onChange={updateFormState}
-            />
-          </div>
-
-          <div className="flex flex-col items-center">
-            <label
-              htmlFor="year"
-              className="gap-2 text-center  font-bold text-white"
-            >
-              Enter the year
-            </label>
-
-            <input
-              type="number"
-              name="year"
-              id="year"
-              placeholder="Enter 
-             the Year"
-              className="border-2 border-black border-solid w-[20rem] rounded-[1rem] h-[3rem]"
-              value={form.year}
-              onChange={updateFormState}
-            />
-          </div>
-
-          <div className="flex items-center"></div>
-          <div className="flex items-center w-[9rem] h-[3rem] mx-[45%] mt-[1rem] border-8 bg-sky-500 hover:bg-sky-700 rounded-[25px]">
-            <button
-              className=" text-[2rem] 
-          font-bold p-5 "
-              type="submit"
-            >
-              submit
-            </button>
-          </div>
+          <select
+            name="branch"
+            id="branch"
+            className="text-gray-900 border-2 border-black border-solid rounded-xl px-4 py-3"
+            value={form.branch}
+            disabled={loading}
+            onChange={updateFormState}
+          >
+            <option value="">select Branch</option>
+            <option value="ai"> AI</option>
+            <option value="cse">CSE</option>
+            <option value="civil">CIVIL</option>
+            <option value="ca">CA</option>
+            <option value="eee">EEE</option>
+            <option value="mechenical">Mechanical</option>
+          </select>
         </div>
+
+        <div className="flex flex-col">
+          <label
+            htmlFor="semester"
+            className="font-bold "
+          >
+            Semester
+          </label>
+          <select
+            name="sem"
+            id="semester"
+            className="text-gray-900 border-2 border-black border-solid rounded-xl px-4 py-3"
+            placeholdertext-gray-900="enter your semester name"
+            value={form.sem}
+            onChange={updateFormState}
+            disabled={loading}
+          >
+            <option value="">choose semester</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+          </select>
+        </div>
+
+        <div className="flex flex-col">
+          <label
+            htmlFor="subject"
+            className="ont-bold "
+          >
+            Subject
+          </label>
+          <input
+            type="text"
+            name="subject"
+            id="subject"
+            placeholder="enter the subject name"
+            className="text-gray-900 border-2 border-black border-solid rounded-xl px-4 py-3"
+            value={form.subject}
+            disabled={loading}
+            onChange={updateFormState}
+          />
+        </div>
+
+        <div className="flex flex-col">
+          <label
+            htmlFor="year"
+            className="font-bold "
+          >
+            Enter the year
+          </label>
+
+          <input
+            type="number"
+            name="year"
+            id="year"
+            placeholder="Enter 
+             the Year"
+            className="text-gray-900 border-2 border-black border-solid rounded-xl px-4 py-3"
+            value={form.year}
+            disabled={loading}
+            onChange={updateFormState}
+          />
+        </div>
+
+        <Button
+          className="sm:col-span-2 bg-gray-700"
+          variant="outline"
+          type="submit"
+          disabled={loading}
+          size="lg"
+        >
+          {
+            loading ? 'Please wait' : 'Add Pyq'
+          }
+        </Button>
 
         {/* </div> */}
       </form>

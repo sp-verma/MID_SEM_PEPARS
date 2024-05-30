@@ -2,30 +2,34 @@
 
 import Image from "next/image";
 import image from "/public/sp.jpg";
-import { signIn, signOut } from "next-auth/react";
+import { signIn } from "next-auth/react";
 
-import React from "react";
+import React, { useState } from "react";
 // import Link from "next/link";
 import { useRouter } from "next/navigation";
+import toast from "react-hot-toast";
 
-const Admin = () => {
+const LoginForm = () => {
   const router = useRouter();
+  const [loading, setLoading] = useState(false)
 
   const login = async (e) => {
     e.preventDefault();
 
     try {
+      setLoading(true);
       const { email, password } = e.currentTarget;
 
       if (!email.value || !password.value) {
-        return console.log("please fill the form");
+        return toast.error("please enter email and password to login");
       }
       const data = await signIn("credentials", {
         email: email.value,
         password: password.value,
+        redirect: false
       });
       if (data?.error) {
-        console.log(data);
+        toast.error(data.error)
       } else if (data?.ok) {
         router.push("/admin");
       }
@@ -45,7 +49,10 @@ const Admin = () => {
       //   router.push("/Admin");
       // }
     } catch (error) {
-      console.log(error);
+      toast.error(error.message)
+    }
+    finally {
+      setLoading(false);
     }
   };
 
@@ -66,15 +73,16 @@ const Admin = () => {
                       htmlFor=""
                       className="text-base font-medium text-gray-900"
                     >
-                      {" "}
-                      Email address{" "}
+
+                      Email address
                     </label>
                     <div className="mt-2">
                       <input
-                        className="flex h-10 w-full rounded-md border border-gray-300 bg-transparent px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50"
+                        className="text-gray-900 flex h-10 w-full rounded-md border border-gray-300 bg-transparent px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50"
                         type="email"
                         placeholder="Email"
                         name="email"
+                        disabled={loading}
                       ></input>
                     </div>
                   </div>
@@ -84,30 +92,37 @@ const Admin = () => {
                         htmlFor=""
                         className="text-base font-medium text-gray-900"
                       >
-                        {" "}
-                        Password{" "}
+
+                        Password
                       </label>
                     </div>
                     <div className="mt-2">
                       <input
-                        className="flex h-10 w-full rounded-md border border-gray-300 bg-transparent px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50"
+                        className="text-gray-900 flex h-10 w-full rounded-md border border-gray-300 bg-transparent px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50"
                         type="password"
                         placeholder="Password"
                         name="password"
+                        disabled={loading}
                       ></input>
                     </div>
                   </div>
                   <div>
                     <button
                       type="submit"
+
+                      disabled={loading}
                       className="inline-flex w-full items-center justify-center rounded-md bg-black px-3.5 py-2.5 font-semibold leading-7 text-white hover:bg-black/80"
                     >
-                      Get started
+
+                      {
+                        loading ? 'Please wait' : 'Login'
+                      }
+
                     </button>
                   </div>
                 </div>
               </form>
-              <div className="mt-3 space-y-3">
+              {/* <div className="mt-3 space-y-3">
                 <button
                   type="button"
                   className="relative inline-flex w-full items-center justify-center rounded-md border border-gray-400 bg-white px-3.5 py-2.5 font-semibold text-gray-700 transition-all duration-200 hover:bg-gray-100 hover:text-black focus:bg-gray-100 focus:text-black focus:outline-none"
@@ -140,7 +155,7 @@ const Admin = () => {
                   </span>
                   Sign in with Facebook
                 </button>
-              </div>
+              </div> */}
             </div>
           </div>
           <div className="h-full w-full">
@@ -158,4 +173,4 @@ const Admin = () => {
   );
 };
 
-export default Admin;
+export default LoginForm;

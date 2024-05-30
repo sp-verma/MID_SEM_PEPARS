@@ -1,50 +1,43 @@
+import { fetchPyq } from "@/actions/pyq";
 import UploadPyqForm from "@/components/UploadPyqForm";
-import Navbar from "@/components/navbar";
-import { fetchPyq } from "./action";
+import { Button } from "@/components/ui/button";
+import { Download } from "lucide-react";
 
 const page = async () => {
-  const data = await fetchPyq();
-
-  const pyqdata = data?.pyqs;
-  console.log(pyqdata);
+  const pyqdata = await fetchPyq();
 
   return (
-    <div className="bg-gradient-to-r from-slate-900 to-slate-700">
-      <div className="bg-gradient-to-r from-slate-900 to-slate-700">
-        <Navbar />
-      </div>
+    <div className="flex items-center gap-6 flex-col">
+      {/* <Admin /> */}
+      <UploadPyqForm />
 
-      <div>
-        {/* <Admin /> */}
-        <UploadPyqForm />
-      </div>
-      <div className="  flex gap-2 flex-wrap justify-stretch bg-gradient-to-r from-slate-900 to-slate-700 ">
+      <div className="grid grid-cols-[repeat(auto-fill,minmax(200px,1fr))] w-full gap-4 ">
         {pyqdata?.map((pyq, index) => {
           return (
             <div key={index} className="">
-              <div className="relative h-[200px] w-[200px] rounded-md">
-                <div className="absolute inset-0 bg-black"></div>
-                <div className="absolute bottom-4 left-4 text-left">
-                  <h1 className="text-lg font-semibold text-white">
-                    {pyq?.subject?.name}
-                  </h1>
-                  <p className="mt-2 text-sm text-gray-300">{pyq.year}</p>
-                  <h1 className="text-white">{pyq?.subject?.sem}</h1>
-                  <h1 className="text-white">{pyq?.subject?.branch}</h1>
-                  <a
-                    className="mt-2 inline-flex cursor-pointer items-center text-sm font-semibold text-white"
-                    href={pyq.url}
-                    download
-                  >
-                    download &rarr;
-                  </a>
-                </div>
+              <div className="relative bg-gray-800 rounded-xl p-4">
+                <h2 className="text-lg font-semibold ">
+                  {pyq?.subject?.name}
+                </h2>
+                <p className="mt-2 text-sm text-gray-300">Year <span className="font-semibold">{pyq.year}</span></p>
+                <p className="text-gray-300">Sem <span className="font-semibold">{pyq?.subject?.sem}</span></p>
+                <p className="text-gray-300">Branch <span className="font-semibold">{pyq?.subject?.branch}</span></p>
+                <a
+                  className="mt-2 inline-flex cursor-pointer items-center text-sm font-semibold bg-gray-700 rounded-xl"
+                  href={pyq.url}
+                  download
+                >
+                  <Button>
+                    download <Download className="ml-2 w-4 h-4" />
+                  </Button>
+                </a>
               </div>
             </div>
           );
         })}
-      </div>
-    </div>
+      </div >
+
+    </div >
   );
 };
 export default page;
