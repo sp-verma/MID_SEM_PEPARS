@@ -28,6 +28,13 @@ export const POST = async (req) => {
     }
 
     const pyq = await Pyq.findOne({ $and: [{ subject: subjectId }, { year }] });
+
+    if (pyq) {
+      const utapi = new UTApi();
+      await utapi.deleteFiles(url.split("https://utfs.io/f/")[1]);
+      return NextResponse.json({ message: "PYQ already exist", type: "info" });
+    }
+
     if (!pyq) await Pyq.create({ subject: subjectId, url, year });
 
     revalidatePath("/admin", "/subject", "/pyq");
@@ -69,7 +76,6 @@ export const GET = async (req) => {
         // { path: "subject.branch", model: Branch },
       ]);
     }
-    console.log('sp',pyqs)
     return NextResponse.json({
       pyqs,
       message: "pyqdata fetched Successfully",

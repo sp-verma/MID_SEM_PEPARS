@@ -1,5 +1,6 @@
+import { fetchSubjects } from "@/actions/subject";
 import Link from "next/link";
-
+import { fetchSubjects } from "./action";
 // import React from "react";
 // import Subject from "@/components/subject";
 import { redirect } from "next/navigation";
@@ -31,7 +32,6 @@ const page = async ({ searchParams }) => {
   return (
     <div className=" bg-gray-900 min-h-[42rem] flex flex-col ">
       <p className="mt-3 text-2xl text-center md:text-5xl uppercase font-extrabold bg-gradient-to-r from-rose-400 via-fuchsia-500 to-indigo-500 bg-clip-text text-transparent pt-7">
-        {" "}
         CHOOSE SUBJECT
       </p>
 

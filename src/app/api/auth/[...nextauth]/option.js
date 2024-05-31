@@ -1,6 +1,9 @@
 import User from "@/models/user";
 import CredentialsProvider from "next-auth/providers/credentials";
 import bcrypt from "bcrypt";
+import { conectDB } from "@/lib/conection";
+
+conectDB();
 
 export const authOptions = {
   providers: [
@@ -37,7 +40,7 @@ export const authOptions = {
       },
       callbacks: {
         async jwt({ token, user }) {
-          token.isAdmin = true; // user.isAdmin
+          // token.isAdmin = true; // user.isAdmin
           return token;
         },
         async session({ session, token, user }) {

@@ -1,13 +1,9 @@
-import Signupform from "@/components/signupform";
-import Footer from "@/components/Footer/Footer";
-import Navbar from '@/components/navbar'
+import LoginForm from "@/components/loginForm";
 
 const page = async () => {
   return (
-    <div className="flex flex-col gap-[50px]">
-    <Navbar/>
-      <Signupform />
-    <Footer/>
+    <div className="flex flex-col">
+      <LoginForm />
     </div>
   );
 };

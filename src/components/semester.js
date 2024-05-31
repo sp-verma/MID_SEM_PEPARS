@@ -51,7 +51,7 @@ export default function Semester({ branch }) {
     <motion.div
       initial={{ y: 10, opacity: 0 }}
       animate={{ y: 0, opacity: 5 }}
-      className="grid grid-cols-[repeat(auto-fit,minmax(200px,1fr))] w-full gap-4"
+      className="grid grid-cols-[repeat(auto-fit,minmax(280px,1fr))] w-full gap-4"
     >
       {menuItems2.map((item2) => (
         <Link
