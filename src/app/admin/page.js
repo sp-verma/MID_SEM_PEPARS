@@ -1,25 +1,17 @@
 import { fetchPyq } from "@/actions/pyq";
 import UploadPyqForm from "@/components/UploadPyqForm";
-import Navbar from "@/components/navbar";
-import { fetchPyq } from "./action";
+import { Button } from "@/components/ui/button";
+import { Download } from "lucide-react";
 
 const page = async () => {
-  const data = await fetchPyq();
-
-  const pyqdata = data?.pyqs;
-  console.log(pyqdata);
+  const pyqdata = await fetchPyq();
 
   return (
-    <div className="bg-gradient-to-r from-slate-900 to-slate-700">
-      <div className="bg-gradient-to-r from-slate-900 to-slate-700">
-        <Navbar />
-      </div>
+    <div className="flex items-center gap-6 flex-col">
+      {/* <Admin /> */}
+      <UploadPyqForm />
 
-      <div>
-        {/* <Admin /> */}
-        <UploadPyqForm />
-      </div>
-      <div className="  flex gap-2 flex-wrap justify-stretch bg-gradient-to-r from-slate-900 to-slate-700 ">
+      <div className="grid grid-cols-[repeat(auto-fill,minmax(200px,1fr))] w-full gap-4 ">
         {pyqdata?.map((pyq, index) => {
           return (
             <div key={index} className="">

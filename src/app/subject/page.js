@@ -1,8 +1,5 @@
 import { fetchSubjects } from "@/actions/subject";
 import Link from "next/link";
-import { fetchSubjects } from "./action";
-// import React from "react";
-// import Subject from "@/components/subject";
 import { redirect } from "next/navigation";
 import Subject from "@/models/Subject";
 
