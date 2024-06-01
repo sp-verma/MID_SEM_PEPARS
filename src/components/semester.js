@@ -56,7 +56,6 @@ export default function Semester({ branch }) {
       {menuItems2.map((item2) => (
         <Link
           key={item2.name}
-          scroll={false}
           href={`/subject?branch=${branch}&sem=${item2.name}`}
         >
           {/* <div className="w-fit h-fit ">

@@ -1,17 +1,20 @@
+
 import mongoose from "mongoose";
 
-export const conectDB = () => {
-  try {
-    if (mongoose.connection.readyState >= 1) return;
-    mongoose
-      .connect(process.env.Mongo_Db)
-      .then(() => {
-        console.log("connect sucesfully");
-      })
-      .catch((e) => {
-        console.log("db Connection error", e);
-      });
-  } catch (error) {
-    console.log(error);
-  }
+const { Mongo_Db } = process.env;
+
+if (!Mongo_Db) throw new Error("Mongo_Db is not defined in .env.");
+
+let cached = global.mongoose;
+
+if (!cached) {
+  cached = global.mongoose = { conn: null };
+}
+
+export const conectDB = async () => {
+  if (cached.conn) return cached.conn;
+  cached.conn = await mongoose.connect(Mongo_Db);
+  console.log("connect sucesfully");
+
+  return cached.conn;
 };

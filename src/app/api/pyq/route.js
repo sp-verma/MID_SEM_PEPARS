@@ -37,7 +37,9 @@ export const POST = async (req) => {
 
     if (!pyq) await Pyq.create({ subject: subjectId, url, year });
 
-    revalidatePath("/admin", "/subject", "/pyq");
+    revalidatePath("/admin");
+    revalidatePath("/subject");
+    revalidatePath("/pyq");
 
     return NextResponse.json({ message: "PYQ Uploaded", type: "success" });
   } catch (error) {

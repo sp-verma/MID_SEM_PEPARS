@@ -14,29 +14,26 @@ const page = async () => {
       <div className="grid grid-cols-[repeat(auto-fill,minmax(200px,1fr))] w-full gap-4 ">
         {pyqdata?.map((pyq, index) => {
           return (
-            <div key={index} className="">
-              <div className="relative bg-gray-800 rounded-xl p-4">
-                <h2 className="text-lg font-semibold ">{pyq?.subject?.name}</h2>
-                <p className="mt-2 text-sm text-gray-300">
-                  Year <span className="font-semibold">{pyq.year}</span>
-                </p>
-                <p className="text-gray-300">
-                  Sem <span className="font-semibold">{pyq?.subject?.sem}</span>
-                </p>
-                <p className="text-gray-300">
-                  Branch{" "}
-                  <span className="font-semibold">{pyq?.subject?.branch}</span>
-                </p>
-                <a
-                  className="mt-2 inline-flex cursor-pointer items-center text-sm font-semibold bg-gray-700 rounded-xl"
-                  href={pyq.url}
-                  download
-                >
-                  <Button>
-                    download <Download className="ml-2 w-4 h-4" />
-                  </Button>
-                </a>
-              </div>
+            <div key={index} className="relative bg-gray-800 rounded-xl p-4 flex flex-col">
+              <h2 className="text-lg font-semibold ">{pyq?.subject?.name}</h2>
+              <p className="mt-2 text-sm text-gray-300">
+                Year : <span className="font-semibold">{pyq.year}</span>
+              </p>
+              <p className="text-gray-300">
+                Sem : <span className="font-semibold">{pyq?.subject?.sem}</span>
+              </p>
+              <p className="text-gray-300">
+                Branch : <span className="font-semibold uppercase">{pyq?.subject?.branch}</span>
+              </p>
+              <a
+                className="mt-2 inline-flex cursor-pointer items-center text-sm font-semibold bg-gray-700 rounded-xl"
+                href={pyq.url}
+                download
+              >
+                <Button className="w-full">
+                  Download <Download className="ml-2 w-4 h-4" />
+                </Button>
+              </a>
             </div>
           );
         })}

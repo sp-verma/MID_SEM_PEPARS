@@ -29,7 +29,7 @@ const top = () => {
         </div>
         <div className="order-1">
           <Image
-            class="mx-auto lg:mx-0 mt-8 w-64 md:w-72 lg:max-w-lg lg:mt-0 lg:w-1/2 transform hover:-translate-y-3 infinite transition duration-500 ease-in-out"
+            className="mx-auto lg:mx-0 mt-8 w-64 md:w-72 lg:max-w-lg lg:mt-0 lg:w-1/2 transform hover:-translate-y-3 infinite transition duration-500 ease-in-out"
             src={sideimage}
             width={200}
             height={200}
