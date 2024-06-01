@@ -56,11 +56,11 @@ export default function CardOne({ params }) {
       <p className="mt-3 text-2xl text-center md:text-5xl uppercase font-extrabold bg-gradient-to-r from-rose-400 via-fuchsia-500 to-indigo-500 bg-clip-text text-transparent">We're delighted to have you here. Dive into our collection of previous years' mid-semester exam papers !</p>
     </div> */}
         {!isBranchSelected ? (
-          <h1 className=" pt-[50px] font-bold text-[25px] text-center text-white ">
+          <h1 className="mt-3 text-2xl text-center md:text-5xl uppercase font-extrabold bg-gradient-to-r from-rose-400 via-fuchsia-500 to-indigo-500 bg-clip-text text-transparent pt-7">
             Select Your Deparment
           </h1>
         ) : (
-          <h1 className="text-[#fffffe] font-bold text-[25px] text-center opacitry-100%">
+          <h1 className="mt-3 text-2xl text-center md:text-5xl uppercase font-extrabold bg-gradient-to-r from-rose-400 via-fuchsia-500 to-indigo-500 bg-clip-text text-transparent pt-7">
             Select Your semester
           </h1>
         )}

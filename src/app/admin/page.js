@@ -16,12 +16,17 @@ const page = async () => {
           return (
             <div key={index} className="">
               <div className="relative bg-gray-800 rounded-xl p-4">
-                <h2 className="text-lg font-semibold ">
-                  {pyq?.subject?.name}
-                </h2>
-                <p className="mt-2 text-sm text-gray-300">Year <span className="font-semibold">{pyq.year}</span></p>
-                <p className="text-gray-300">Sem <span className="font-semibold">{pyq?.subject?.sem}</span></p>
-                <p className="text-gray-300">Branch <span className="font-semibold">{pyq?.subject?.branch}</span></p>
+                <h2 className="text-lg font-semibold ">{pyq?.subject?.name}</h2>
+                <p className="mt-2 text-sm text-gray-300">
+                  Year <span className="font-semibold">{pyq.year}</span>
+                </p>
+                <p className="text-gray-300">
+                  Sem <span className="font-semibold">{pyq?.subject?.sem}</span>
+                </p>
+                <p className="text-gray-300">
+                  Branch{" "}
+                  <span className="font-semibold">{pyq?.subject?.branch}</span>
+                </p>
                 <a
                   className="mt-2 inline-flex cursor-pointer items-center text-sm font-semibold bg-gray-700 rounded-xl"
                   href={pyq.url}
@@ -35,9 +40,8 @@ const page = async () => {
             </div>
           );
         })}
-      </div >
-
-    </div >
+      </div>
+    </div>
   );
 };
 export default page;

@@ -1,5 +1,7 @@
 import { redirect } from "next/navigation";
 import { fetchPyq } from "@/actions/pyq";
+import { Button } from "@/components/ui/button";
+import { Download } from "lucide-react";
 
 
 
@@ -26,19 +28,19 @@ const page = async ({ searchParams }) => {
 
           return (
             <div key={index} className="">
-              <div className="relative h-[120px] w-[200px] border-2 border-white rounded-[25px]  hover:w-[220px] hover:h-[150px]">
+              <div className="relative  h-[150px] w-[200px] border-2 border-white rounded-[25px]  hover:w-[220px] hover:h-[150px]">
                 <div className="   text-lg font-semibold text-white flex justify-center items-center pt-[15%] hover:text-3xl flex-col  ">
                   {pyq.subject.name}
                   <h1> {pyq.year}</h1>
                   <a
-                    className="mt-2 inline-flex cursor-pointer items-center text-sm font-semibold text-white"
-                    href={pyq.url}
-                    download={`${pyq.subject.name}_sem-${pyq.subject.sem}_${pyq.year}.pdf`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    download &rarr;
-                  </a>
+                  className="    cursor-pointer items-center text-sm font-semibold  rounded-xl"
+                  href={pyq.url}
+                  download
+                >
+                  <Button>
+                    download <Download className="ml-2 w-4 h-4" />
+                  </Button>
+                </a>
 
 
                 </div>

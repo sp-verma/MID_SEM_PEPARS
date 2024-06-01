@@ -1,4 +1,4 @@
-'usre server';
+'use server';
 import { conectDB } from "@/lib/conection";
 import Pyq from "@/models/Pyq";
 import Subject from "@/models/Subject";

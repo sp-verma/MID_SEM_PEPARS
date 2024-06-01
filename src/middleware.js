@@ -7,7 +7,7 @@ export async function middleware(req) {
   const pathname = req.nextUrl.pathname;
   const protectedPath = pathname === '/admin'
 
-  if (token && pathname === '/login')
+  if (token && pathname === protectedPath)
     return NextResponse.redirect(new URL("/", req.url));
   if (!token && protectedPath)
     return NextResponse.redirect(new URL("/login", req.url));
