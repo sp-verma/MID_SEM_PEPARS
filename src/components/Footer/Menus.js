@@ -27,7 +27,7 @@ export const SUPPORT = [
 export const Icons = [
   { name: "logo-facebook", link: "#" },
   { name: "logo-twitter", link: "#" },
-  { name: "logo-github", link: "#" },
+  { name: "logo-github", link: "https://github.com/sp-verma" },
   { name: "logo-linkedin", link: "#" },
-  { name: "logo-instagram", link: "#" },
+  { name: "logo-instagram", link: "" },
 ];

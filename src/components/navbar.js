@@ -21,6 +21,10 @@ const menuItems = [
     name: "Contact",
     href: "contact",
   },
+  {
+    name:"Login",
+    href:"login",
+  }
 ];
 
 export default function ExampleNavbarOne() {
@@ -53,7 +57,7 @@ export default function ExampleNavbarOne() {
               />
             </svg>
           </span>
-          <span className="font-bold text-[20px] text-[#fffffe]">PyqHub</span>
+          <span className="mt-3 text-2xl text-center md:text-5xl uppercase font-extrabold bg-gradient-to-r from-rose-400 via-fuchsia-500 to-indigo-500 bg-clip-text text-transparent pt-7">PyqHub</span>
         </Link>
         <div className="hidden lg:block">
           <ul className="inline-flex space-x-8">
