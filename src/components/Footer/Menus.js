@@ -1,9 +1,9 @@
 import { Facebook, Github, Instagram, Linkedin, Twitter } from "lucide-react";
 
 export const Developer = [
-  { name: "satya prakash verma", link: "#" },
-  { name: "Batch:2022", link: "#" },
-  { name: "Branch:Cse(AI)", link: "#" },
+  { name: "Satya Prakash Verma", link: "" },
+  { name: "Batch: 2022", link: "" },
+  { name: "Branch: Cse(AI)", link: "" },
 ];
 export const RESOURCES = [
   { name: "Home", link: "/" },

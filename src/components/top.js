@@ -14,11 +14,10 @@ const top = () => {
       className="h-[calc(100vh-76px)]"
     >
       <div className="h-full grid grid-cols-1 lg:grid-cols-2 order-2 items-center">
-        <div className="px-4 py-10 sm:px-6 sm:py-16 lg:px-8 lg:py-24">
+        <div className="px-4 py-10 sm:px-6 sm:py-16 lg:px-8 lg:py-24 order-2 lg:order-1">
           <div className="xl:mx-auto xl:w-full xl:max-w-sm 2xl:max-w-md">
             <div className="flex flex-col gap-10 items-center">
               <p className="mt-3 text-2xl text-center md:text-5xl uppercase font-extrabold bg-gradient-to-r from-rose-400 via-fuchsia-500 to-indigo-500 bg-clip-text text-transparent">
-                {" "}
                 previous years' mid-semester exam papers !
               </p>
               <Link href={"#get-started"} >
