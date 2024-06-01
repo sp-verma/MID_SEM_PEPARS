@@ -1,21 +1,23 @@
+import { Facebook, Github, Instagram, Linkedin, Twitter } from "lucide-react";
+
 export const Developer = [
   { name: "satya prakash verma", link: "#" },
   { name: "Batch:2022", link: "#" },
   { name: "Branch:Cse(AI)", link: "#" },
 ];
 export const RESOURCES = [
-  { name: "", link: "#" },
-  { name: "Use cases", link: "#" },
-  { name: "Blog", link: "#" },
-  { name: "Online evenet", link: "#" },
-  { name: "Nostrud exercitation", link: "#" },
+  { name: "Home", link: "/" },
+  { name: "About", link: "/about" },
+  { name: "Contact", link: "/contact" },
+  { name: "Login", link: "/login" },
 ];
-export const COMPANY = [
-  { name: "Diversity & inclusion", link: "#" },
-  { name: "About us", link: "#" },
-  { name: "Press", link: "#" },
-  { name: "Customer Stories", link: "#" },
-  { name: "Online communities", link: "#" },
+export const BRANCHS = [
+  { name: "CSE", link: "?branch=cse#get-started" },
+  { name: "AI", link: "?branch=ai#get-started" },
+  { name: "EEE", link: "?branch=eee#get-started" },
+  { name: "CIVIL", link: "?branch=civil#get-started" },
+  { name: "CA", link: "?branch=ca#get-started" },
+  { name: "MECH", link: "?branch=mechanical#get-started" }
 ];
 export const SUPPORT = [
   { name: "Documentation", link: "#" },
@@ -25,9 +27,9 @@ export const SUPPORT = [
 ];
 
 export const Icons = [
-  { name: "logo-facebook", link: "#" },
-  { name: "logo-twitter", link: "#" },
-  { name: "logo-github", link: "https://github.com/sp-verma" },
-  { name: "logo-linkedin", link: "#" },
-  { name: "logo-instagram", link: "" },
+  { name: <Facebook />, link: "" },
+  { name: <Twitter />, link: "" },
+  { name: <Github />, link: "https://github.com/sp-verma" },
+  { name: <Linkedin />, link: "" },
+  { name: <Instagram />, link: "" },
 ];

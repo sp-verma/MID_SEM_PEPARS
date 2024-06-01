@@ -19,6 +19,9 @@ const POST = async (req) => {
       });
     }
     const subject = await Subject.create({ name, sem, branch });
+    revalidatePath("/admin");
+    revalidatePath("/subject");
+    revalidatePath("/pyq");
     return NextResponse.json({ message: "subject added", type: "success" });
   } catch (error) {
     console.log(error);
