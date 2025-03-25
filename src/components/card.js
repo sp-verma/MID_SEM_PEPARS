@@ -50,7 +50,7 @@ export default function CardOne({ params }) {
     >
 
       <div className="xl:mx-auto xl:w-full">
-        <h1 className="mt-3 text-2xl text-center md:text-5xl uppercase font-extrabold bg-gradient-to-r from-rose-400 via-fuchsia-500 to-indigo-500 bg-clip-text text-transparent pt-7">
+        <h1 className="mt-2 text-2xl text-center md:text-5xl uppercase font-extrabold bg-gradient-to-r from-rose-400 via-fuchsia-500 to-indigo-500 bg-clip-text text-transparent pt-7">
           {!isBranchSelected ? (
             'Select Your Deparment'
           ) : (
@@ -66,7 +66,7 @@ export default function CardOne({ params }) {
           }
         </h2>
 
-        <div className=" justify-between bg-gray-900 min-h-[42rem] px-4 mt-[5rem] m-2 grid grid-cols-[repeat(auto-fit,minmax(280px,1fr))] auto-rows-[250px] gap-4 ">
+        <div className=" justify-between bg-gray-900 min-h-[46rem] px-4 mt-[5rem] m-2 grid grid-cols-[repeat(auto-fit,minmax(280px,1fr))] auto-rows-[250px] gap-4 ">
           {!isBranchSelected &&
             menuItems.map((item, index) => (
               <div className="relative w-full overflow-hidden rounded-xl shadow" key={index}>

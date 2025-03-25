@@ -51,7 +51,7 @@ export default function Semester({ branch }) {
     <motion.div
       initial={{ y: 10, opacity: 0 }}
       animate={{ y: 0, opacity: 5 }}
-      className="grid grid-cols-[repeat(auto-fit,minmax(280px,1fr))] w-full gap-4"
+      className="grid grid-cols-[repeat(auto-fit,minmax(280px,1fr))] w-full gap-4 shadow-xl "
     >
       {menuItems2.map((item2) => (
         <Link
@@ -68,7 +68,7 @@ export default function Semester({ branch }) {
                 />
               </div> */}
 
-          <div className="text-white p-6 text-xl w-full items-center flex justify-center rounded-[40px] font-bold border-2 hover:scale-105 transition-transform">
+          <div className="text-white p-6 text-xl w-full items-center flex justify-center rounded-[40px] font-bold border-2 hover:scale-105 transition-transform bg-black shadow-2xl">
             {item2.name}
           </div>
         </Link>
