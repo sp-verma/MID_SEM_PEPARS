@@ -141,7 +141,7 @@ const UploadPyqForm = () => {
             <option value="civil">CIVIL</option>
             <option value="ca">CA</option>
             <option value="eee">EEE</option>
-            <option value="mechenical">Mechenical</option>
+            <option value="mechanical">Mechanical</option>
           </select>
         </div>
 
