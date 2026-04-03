@@ -24,7 +24,7 @@ const UploadPyqForm = () => {
 
   const { startUpload, permittedFileInfo, isUploading } = useUploadThing("uploadpepar", {
     onClientUploadComplete: async (res) => {
-      const url = res[0].url;
+      const url = res[0].ufsUrl;
 
       const { subject, branch, year, sem } = form;
 
