@@ -26,6 +26,10 @@ const UploadPyqForm = () => {
     onClientUploadComplete: async (res) => {
       const url = res[0].ufsUrl;
 
+  if (!url) {
+  toast.error("URL not received from upload");
+}
+
       const { subject, branch, year, sem } = form;
 
       const resp = await fetch("/api/pyq", {
@@ -38,6 +42,7 @@ const UploadPyqForm = () => {
           url: url,
         }),
       });
+      
 
       const data = await resp.json();
 
